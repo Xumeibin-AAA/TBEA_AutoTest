@@ -1,7 +1,6 @@
 import os, sys, random, ast
 import uuid
 sys.path.append(os.path.dirname(os.path.dirname(os.getcwd())))
-
 import json, ast, random
 
 from TBEA.base.util import BasePage, BoxDriver, GetTxt, GetRedis
