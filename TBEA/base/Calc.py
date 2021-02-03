@@ -23,6 +23,7 @@ class calc:
             return '取值错误！！！'
 
     def Test1_Result(self, data, t):
+        t = int(t)
         redis = GetRedis()
         value = redis.GetDate(data)
         value = ast.literal_eval(value)
@@ -66,9 +67,10 @@ class calc:
         r19 = f"{(value['p15'] - value['p7']) / value['p1'] * (1 / r3) * 100}%"
         # ΣCH 相对产气速率
         r20 = f"{(r4 - r1) / value['p1'] * (1 / r3) * 100}%"
-        return {'r1': r1, 'r2': r2, 'r3': r3, 'r4': r4, 'r5': r5, 'r6': r6, 'r7': r7, 'r8': r8, 'r9': r9, 'r10': r10,
-                'r11': r11, 'r12': r12, 'r13': r13, 'r14': r14, 'r15': r15, 'r16': r16, 'r17': r17, 'r18': r18,
-                'r19': r19, 'r20': r20}
+        return {'rs1': r1, 'rs2': r2, 'rs3': r3, 'rs4': r4, 'rs5': r5, 'rs6': r6, 'rs7': r7, 'rs8': r8, 'rs9': r9,
+                'rs10': r10,
+                'rs11': r11, 'rs12': r12, 'rs13': r13, 'rs14': r14, 'rs15': r15, 'rs16': r16, 'rs17': r17, 'rs18': r18,
+                'rs19': r19, 'rs20': r20}
 
     def Test2_Result(self, data):
         redis = GetRedis()
@@ -109,7 +111,7 @@ class calc:
         mi = min([value['p22'], value['p23'], value['p24']])
         avg = sum([value['p22'], value['p23'], value['p24']]) / 3
         r7 = (ma - mi) / avg
-        return {'r1': r1, 'r2': r2, 'r3': r3, 'r4': r4, 'r5': r5, 'r6': r6, 'r7': r7}
+        return {'rs1': r1, 'rs2': r2, 'rs3': r3, 'rs4': r4, 'rs5': r5, 'rs6': r6, 'rs7': r7}
 
     def Test3_Result(self, data):
         redis = GetRedis()
@@ -135,7 +137,8 @@ class calc:
         r9 = value['p14'] / value['p13']
         # 高压中压和低压 - 极化指数k
         r10 = value['p15'] / value['p14']
-        return {'r1': r1, 'r2': r2, 'r3': r3, 'r4': r4, 'r5': r5, 'r6': r6, 'r7': r7, 'r8': r8, 'r9': r9, 'r10': r10}
+        return {'rs1': r1, 'rs2': r2, 'rs3': r3, 'rs4': r4, 'rs5': r5, 'rs6': r6, 'rs7': r7, 'rs8': r8, 'rs9': r9,
+                'rs10': r10}
 
     def Test4_Result(self, data):
         redis = GetRedis()
@@ -151,7 +154,7 @@ class calc:
         r4 = value['p8'] * 1.3 ** ((20 - value['p1']) / 10)
         # 高压中压和低压 tanδ(%)（20℃）
         r5 = value['p10'] * 1.3 ** ((20 - value['p1']) / 10)
-        return {'r1': r1, 'r2': r2, 'r3': r3, 'r4': r4, 'r5': r5}
+        return {'rs1': r1, 'rs2': r2, 'rs3': r3, 'rs4': r4, 'rs5': r5}
 
     def Test5_Result(self, data):
         redis = GetRedis()
@@ -167,7 +170,7 @@ class calc:
         r4 = value['p8'] * 1.3 ** ((20 - value['p1']) / 10)
         # 高压中压和低压 tanδ(%)（20℃）
         r5 = value['p10'] * 1.3 ** ((20 - value['p1']) / 10)
-        return {'r1': r1, 'r2': r2, 'r3': r3, 'r4': r4, 'r5': r5}
+        return {'rs1': r1, 'rs2': r2, 'rs3': r3, 'rs4': r4, 'rs5': r5}
 
     def Test6_Result(self, data):
         pass
@@ -182,6 +185,9 @@ class calc:
         redis = GetRedis()
         value = redis.GetDate(data)
         value = ast.literal_eval(value)
+        height = float(height)
+        centre = float(height)
+        low = float(low)
         # 最负分接 电压比 AB
         r1 = value['p1'] / centre
         # 最负分接 电压比 BC
@@ -290,18 +296,19 @@ class calc:
         r53 = r50 - centre / low
         # 最正分接 电压比偏差 CA
         r54 = r51 - centre / low
-        return {'r1': r1, 'r2': r2, 'r3': r3, 'r4': r4, 'r5': r5, 'r6': r6, 'r7': r7, 'r8': r8, 'r9': r9, 'r10': r10,
-                'r11': r11, 'r12': r12, 'r13': r13, 'r14': r14, 'r15': r15, 'r16': r16, 'r17': r17, 'r18': r18,
-                'r19': r19, 'r20': r20, 'r21': r21, 'r22': r22, 'r23': r23, 'r24': r24, 'r25': r25, 'r26': r26,
-                'r27': r27, 'r28': r28, 'r29': r29, 'r30': r30, 'r31': r31, 'r32': r32, 'r33': r33, 'r34': r34,
-                'r35': r35, 'r36': r36, 'r37': r37, 'r38': r38, 'r39': r39, 'r40': r40, 'r41': r41, 'r42': r42,
-                'r43': r43, 'r44': r44, 'r45': r45, 'r46': r46, 'r47': r47, 'r48': r48, 'r49': r49, 'r50': r50,
-                'r51': r51, 'r52': r52, 'r53': r53, 'r54': r54}
+        return {'rs1': r1, 'rs2': r2, 'rs3': r3, 'rs4': r4, 'rs5': r5, 'rs6': r6, 'rs7': r7, 'rs8': r8, 'rs9': r9,
+                'rs10': r10,
+                'rs11': r11, 'rs12': r12, 'rs13': r13, 'rs14': r14, 'rs15': r15, 'rs16': r16, 'rs17': r17, 'rs18': r18,
+                'rs19': r19, 'rs20': r20, 'rs21': r21, 'rs22': r22, 'rs23': r23, 'rs24': r24, 'rs25': r25, 'rs26': r26,
+                'rs27': r27, 'rs28': r28, 'rs29': r29, 'rs30': r30, 'rs31': r31, 'rs32': r32, 'rs33': r33, 'rs34': r34,
+                'rs35': r35, 'rs36': r36, 'rs37': r37, 'rs38': r38, 'rs39': r39, 'rs40': r40, 'rs41': r41, 'rs42': r42,
+                'rs43': r43, 'rs44': r44, 'rs45': r45, 'rs46': r46, 'rs47': r47, 'rs48': r48, 'rs49': r49, 'rs50': r50,
+                'rs51': r51, 'rs52': r52, 'rs53': r53, 'rs54': r54}
 
     def Test10_Result(self, data):
         pass
 
-    def Test11_Result(self, data,electricity):
+    def Test11_Result(self, data, electricity):
         '''
 
         :param data:
@@ -312,32 +319,33 @@ class calc:
         value = redis.GetDate(data)
         value = ast.literal_eval(value)
         # 空载电流 励磁倍率: 90%
-        r1 = (value['p3']+value['p4']+value['p5'])/3/electricity
+        r1 = (value['p3'] + value['p4'] + value['p5']) / 3 / electricity
         # 空载损耗 励磁倍率: 90%
-        r2 = value['p6']*(1+((value['p1']-value['p2'])/value['p1']))
+        r2 = value['p6'] * (1 + ((value['p1'] - value['p2']) / value['p1']))
         # 空载电流 励磁倍率: 100%
-        r3 = (value['p9']+value['p10']+value['p11'])/3/electricity
+        r3 = (value['p9'] + value['p10'] + value['p11']) / 3 / electricity
         # 空载损耗 励磁倍率: 100%
-        r4 = value['p12']*(1+((value['p7']-value['p8'])/value['p7']))
+        r4 = value['p12'] * (1 + ((value['p7'] - value['p8']) / value['p7']))
         # 空载电流 励磁倍率: 110%
-        r5 = (value['p15']+value['p16']+value['p17'])/3/electricity
+        r5 = (value['p15'] + value['p16'] + value['p17']) / 3 / electricity
         # 空载损耗 励磁倍率: 110%
-        r6 = value['p18']*(1+((value['p13']-value['p14'])/value['p13']))
+        r6 = value['p18'] * (1 + ((value['p13'] - value['p14']) / value['p13']))
         # 空载电流 励磁倍率: 90%
-        r7 = (value['p21']+value['p22']+value['p23'])/3/electricity
+        r7 = (value['p21'] + value['p22'] + value['p23']) / 3 / electricity
         # 空载损耗 励磁倍率: 90%
-        r8 = value['p24']*(1+((value['p18']-value['p20'])/value['p19']))
+        r8 = value['p24'] * (1 + ((value['p18'] - value['p20']) / value['p19']))
         # 空载电流 励磁倍率: 100%
-        r9 = (value['p27']+value['p28']+value['p29'])/3/electricity
+        r9 = (value['p27'] + value['p28'] + value['p29']) / 3 / electricity
         # 空载损耗 励磁倍率: 100%
-        r10 = value['p30']*(1+((value['p24']-value['p26'])/value['p25']))
+        r10 = value['p30'] * (1 + ((value['p24'] - value['p26']) / value['p25']))
         # 空载电流 励磁倍率: 100%
-        r11 = (value['p33']+value['p34']+value['p35'])/3/electricity
+        r11 = (value['p33'] + value['p34'] + value['p35']) / 3 / electricity
         # 空载损耗 励磁倍率: 100%
-        r12 = value['p36']*(1+((value['p30']-value['p32'])/value['p31']))
-        return {'r1':r1,'r2':r2,'r3':r3,'r4':r4,'r5':r5,'r6':r6,'r7':r7,'r8':r8,'r9':r9,'r10':r10,'r11':r11,'r12':r12}
+        r12 = value['p36'] * (1 + ((value['p30'] - value['p32']) / value['p31']))
+        return {'rs1': r1, 'rs2': r2, 'rs3': r3, 'rs4': r4, 'rs5': r5, 'rs6': r6, 'rs7': r7, 'rs8': r8, 'rs9': r9,
+                'rs10': r10, 'rs11': r11, 'rs12': r12}
 
-    def Test12_Result(self, data,P0):
+    def Test12_Result(self, data, P0):
         redis = GetRedis()
         value = redis.GetDate(data)
         value = ast.literal_eval(value)
@@ -359,7 +367,7 @@ class calc:
         r8 = P0 + value['p40']
         # 中对低 最负分接
         r9 = P0 + value['p45']
-        return {'r1':r1,'r2':r2,'r3':r3,'r4':r4,'r5':r5,'r6':r6,'r7':r7,'r8':r8,'r9':r9}
+        return {'rs1': r1, 'rs2': r2, 'rs3': r3, 'rs4': r4, 'rs5': r5, 'rs6': r6, 'rs7': r7, 'rs8': r8, 'rs9': r9}
 
     def Test13_Result(self, data):
         pass

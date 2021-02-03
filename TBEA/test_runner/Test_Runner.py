@@ -12,7 +12,7 @@ class TestRunner:
         # 将测试用例添加到测试套件中
         # 参数1，用例所在的路径
         # 参数2，用例文件名应满足的条件
-        suite.addTests(unittest.TestLoader().discover(r'..\case', pattern='*_test.py'))
+        suite.addTests(unittest.TestLoader().discover(r'..\case', pattern='AddTest_DoubleCalc_test.py'))
 
         # 创建html报告文件
         timestr = time.strftime('%Y-%m-%d_%H-%M-%S')  # 时间戳

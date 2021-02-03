@@ -128,7 +128,11 @@ class BoxDriver:
         退出浏览器
         '''
         self.driver.quit()
-
+    def back(self):
+        '''
+        后退
+        '''
+        self.driver.back();
     def close(self):
         '''
         关闭当前窗口
